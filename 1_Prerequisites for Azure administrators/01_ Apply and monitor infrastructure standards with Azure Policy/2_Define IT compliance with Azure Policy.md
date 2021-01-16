@@ -122,7 +122,7 @@ $definition = Get-AzPolicyDefinition | Where-Object { $_.Properties.DisplayName 
 # Create the policy assignment with the built-in definition against your resource group
 New-AzPolicyAssignment -Name 'audit-vm-manageddisks' -DisplayName 'Audit VMs without managed disks Assignment' -Scope $rg.ResourceId -PolicyDefinition $definition
 ```
-Parameter                                                           	Description
+# parameter                                                           	Description
 
 Name                                        	The actual name of the assignment. For this example, audit-vm-manageddisks was used.
 
@@ -132,4 +132,39 @@ DisplayName	                                 Display name for the policy assignm
 Definition                                   	The policy definition, based on which you're using to create the assignment. In this case, it's the ID of policy definition Audit                                                  VMs that do not use managed disks.
 
 Scope                                       	A scope determines what resources or grouping of resources the policy assignment gets enforced on. It could range from a                                                             subscription to resource groups. Be sure to replace <scope> with the name of your resource group.
+ 
+ 
+ 
+##  Identify non-compliant resources
+We can use the applied policy definition to identify resources that aren't compliant with the policy assignment through the Azure portal
+
+The results match what you see in the Resource compliance tab of a policy assignment in the Azure portal:
+
+
+![alt text](https://docs.microsoft.com/en-us/learn/modules/intro-to-governance/media/2-policy-compliance.png)
+
+Or we can again use the command-line tools to identify the resources in your resource group that are non-compliant to the policy assignment
+
+```python
+Get-AzPolicyState -ResourceGroupName $rg.ResourceGroupName -PolicyAssignmentName 'audit-vm-manageddisks' -Filter 'IsCompliant eq false'
+```
+here tthe output we ll get 
+```python
+Timestamp                   : 3/9/19 9:21:29 PM
+ResourceId                  : /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmId}
+PolicyAssignmentId          : /subscriptions/{subscriptionId}/providers/microsoft.authorization/policyassignments/audit-vm-manageddisks
+PolicyDefinitionId          : /providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a4d
+IsCompliant                 : False
+SubscriptionId              : {subscriptionId}
+ResourceType                : /Microsoft.Compute/virtualMachines
+ResourceTags                : tbd
+PolicyAssignmentName        : audit-vm-manageddisks
+PolicyAssignmentOwner       : tbd
+PolicyAssignmentScope       : /subscriptions/{subscriptionId}
+PolicyDefinitionName        : 06a78e20-9358-41c9-923c-fb736d382a4d
+PolicyDefinitionAction      : audit
+PolicyDefinitionCategory    : Compute
+ManagementGroupIds          : {managementGroupId}
+```
+
  
