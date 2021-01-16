@@ -65,7 +65,6 @@ Here are some of the most common policy definitions you can apply.
 Policy                                       | Description
 -------------------------------------------- | -------------
 Allowed Storage Account SKUs                 | This policy definition has a set of conditions/rules that determine whether a storage account that is being deployed is within a                                                |  set of SKU sizes. Its effect is to deny all storage accounts that do not adhere to the set of defined SKU sizes.
-
 Allowed Resource Type                        | This policy definition has a set of conditions/rules to specify the resource types that your organization can deploy. Its effect                                                |is to deny all resources that are not part of this defined list.                                               |  
 Allowed Locations                            | This policy enables you to restrict the locations that your organization can specify when deploying resources. Its effect is used                                              |to enforce your geographic compliance requirements.
 Allowed Virtual Machine SKUs                 | This policy enables you to specify a set of VM SKUs that your organization can deploy.
