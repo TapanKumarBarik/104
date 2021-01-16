@@ -52,3 +52,22 @@ Unlike RBAC, Azure Policy is a default-allow-and-explicit-deny system.
 * Assign a definition to a scope of resources
 * View policy evaluation results
   
+# What is a policy definition?
+### A policy definition expresses what to evaluate and what action to take. 
+For example, 
+* you could ensure all public websites are secured with HTTPS, 
+* prevent a particular storage type from being created, or
+* force a specific version of SQL Server to be used.
+
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+
+Here are some of the most common policy definitions you can apply.
