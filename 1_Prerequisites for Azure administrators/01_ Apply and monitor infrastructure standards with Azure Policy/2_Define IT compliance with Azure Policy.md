@@ -43,3 +43,12 @@ Unlike RBAC, Azure Policy is a default-allow-and-explicit-deny system.
   
   ## The process of creating and implementing an Azure Policy begins with creating a policy definition.
   
+  
+  Every policy definition has conditions under which it is enforced. And, it has an accompanying effect that takes place if the conditions are met.
+  
+  To apply a policy, you will:
+
+* Create a policy definition
+* Assign a definition to a scope of resources
+* View policy evaluation results
+  
