@@ -38,3 +38,8 @@ Azure Policy controls properties such as the types or locations of resources.
 
 Unlike RBAC, Azure Policy is a default-allow-and-explicit-deny system.
 `
+
+# Create a policy
+  
+  ## The process of creating and implementing an Azure Policy begins with creating a policy definition.
+  
