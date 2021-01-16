@@ -102,3 +102,34 @@ Notice the [parameters('listofAllowedSKUs')] value; this value is a replacement 
 
 # Apply an Azure policy
 
+To apply a policy, we can use 
+* the Azure portal, or 
+* one of the command-line tools such as Azure PowerShell by adding the Microsoft.PolicyInsights extension.
+
+```python
+# Register the resource provider if it's not already registered
+Register-AzResourceProvider -ProviderNamespace 'Microsoft.PolicyInsights'
+```
+ Once we have registered the provider, we can create a policy assignment. For example, here's a policy definition that identifies virtual machines not using managed disks.
+ 
+ ```python
+ # Get a reference to the resource group that will be the scope of the assignment
+$rg = Get-AzResourceGroup -Name '<resourceGroupName>'
+
+# Get a reference to the built-in policy definition that will be assigned
+$definition = Get-AzPolicyDefinition | Where-Object { $_.Properties.DisplayName -eq 'Audit VMs that do not use managed disks' }
+
+# Create the policy assignment with the built-in definition against your resource group
+New-AzPolicyAssignment -Name 'audit-vm-manageddisks' -DisplayName 'Audit VMs without managed disks Assignment' -Scope $rg.ResourceId -PolicyDefinition $definition
+```
+Parameter                                                           	Description
+
+Name                                        	The actual name of the assignment. For this example, audit-vm-manageddisks was used.
+
+
+DisplayName	                                 Display name for the policy assignment. In this case, you're using Audit VMs without managed disks Assignment.
+
+Definition                                   	The policy definition, based on which you're using to create the assignment. In this case, it's the ID of policy definition Audit                                                  VMs that do not use managed disks.
+
+Scope                                       	A scope determines what resources or grouping of resources the policy assignment gets enforced on. It could range from a                                                             subscription to resource groups. Be sure to replace <scope> with the name of your resource group.
+ 
