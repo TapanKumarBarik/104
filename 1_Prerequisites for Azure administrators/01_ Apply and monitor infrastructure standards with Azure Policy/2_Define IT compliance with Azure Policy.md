@@ -168,3 +168,25 @@ ManagementGroupIds          : {managementGroupId}
 ```
 
  
+# Assign a definition to a scope of resources
+Once you've defined one or more policy definitions, you'll need to assign them. A policy assignment is a policy definition that has been assigned to take place within a specific scope.
+
+This scope could range from a full subscription down to a resource group. Policy assignments are inherited by all child resources. This inheritance means that if a policy is applied to a resource group, it is applied to all the resources within that resource group. However, you can exclude a subscope from the policy assignment. For example, we could enforce a policy for an entire subscription and then exclude a few select resource groups.
+
+You can assign any of these policies through the Azure portal, PowerShell, or Azure CLI. When you assign a policy definition, you will need to supply any parameters that are defined.
+
+![alt text](https://docs.microsoft.com/en-us/learn/modules/intro-to-governance/media/2-policy-parameters.png)
+
+## Policy effects
+Requests to create or update a resource through Azure Resource Manager are evaluated by Azure Policy first. Policy creates a list of all assignments that apply to the resource and then evaluates the resource against each definition. Policy processes several of the effects before handing the request to the appropriate Resource Provider to avoid any unnecessary processing if the resource violates policy.
+
+Each policy definition in Azure Policy has a single effect. That effect determines what happens when the associated policy rule is matched. When that happens, Azure Policy will take a specific action based on the assigned effect.
+```python
+
+POLICY EFFECTS               Policy Effect	What happens?
+Deny                       	The resource creation/update fails due to policy.
+Disabled	                   The policy rule is ignored (disabled). Often used for testing.
+Append                       	Adds additional parameters/fields to the requested resource during creation or update. A common example is adding tags on resources such as Cost                                 Center or specifying allowed IPs for a storage resource.
+Audit, AuditIfNotExists	     Creates a warning event in the activity log when evaluating a non-compliant resource, but it doesn't stop the request.
+DeployIfNotExists             	Executes a template deployment when a specific condition is met. For example, if SQL encryption is enabled on a database, then it can run a                                      template after the DB is created to set it up a specific way.
+```
