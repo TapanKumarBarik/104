@@ -190,3 +190,17 @@ Append                       	Adds additional parameters/fields to the requested
 Audit, AuditIfNotExists	     Creates a warning event in the activity log when evaluating a non-compliant resource, but it doesn't stop the request.
 DeployIfNotExists             	Executes a template deployment when a specific condition is met. For example, if SQL encryption is enabled on a database, then it can run a                                      template after the DB is created to set it up a specific way.
 ```
+
+
+## View policy evaluation results
+Azure Policy can allow a resource to be created even if it doesn't pass validation. In these cases, you can have it trigger an audit event that can be viewed in the Azure Policy portal, or through command-line tools. The easiest approach is in the portal as it provides a nice graphical overview that you can explore. You can find the Azure Policy section through the search field or All Services.
+
+![alt text](https://docs.microsoft.com/en-us/learn/modules/intro-to-governance/media/2-policy-portal.png)
+
+From this screen, you can spot resources that are not compliant and take action to correct them.
+## Remove a policy assignment
+Finally, you can delete policy requirements through the portal, or through the PowerShell command Remove-AzPolicyAssignment as shown below.
+
+```python
+Remove-AzPolicyAssignment -Name 'audit-vm-manageddisks' -Scope '/subscriptions/<subscriptionID>/resourceGroups/<resourceGroupName>'
+```
